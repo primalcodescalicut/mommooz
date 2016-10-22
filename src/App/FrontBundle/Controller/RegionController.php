@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\Region;
+use App\FrontBundle\Form\RegionType;
+use App\FrontBundle\Helper\FormHelper;
 
 class RegionController extends Controller
 {
@@ -41,7 +43,29 @@ class RegionController extends Controller
      */
     public function newAction(Request $request)
     {
-        return new Response('new');
+        $dm = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new RegionType(), new Region());
+        
+        $code = FormHelper::FORM;
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $region = $form->getData();
+                $region->setStatus(true);
+                $dm->persist($region);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
+                $code = FormHelper::REFRESH;
+            } else {
+                $code = FormHelper::REFRESH_FORM;
+            }
+        }
+        
+        $body = $this->renderView('AppFrontBundle:Region:form.html.twig',
+            array('form' => $form->createView())
+        );
+        
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
     
     /**
@@ -50,9 +74,30 @@ class RegionController extends Controller
      * @Route("/{id}/edit", name="region_edit", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Region $user)
+    public function editAction(Request $request, Region $region)
     {
-        // ...
+        $dm = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new RegionType(), $region);
+        
+        $code = FormHelper::FORM;
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $region = $form->getData();
+                $dm->persist($region);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
+                $code = FormHelper::REFRESH;
+            } else {
+                $code = FormHelper::REFRESH_FORM;
+            }
+        }
+        
+        $body = $this->renderView('AppFrontBundle:Region:form.html.twig',
+            array('form' => $form->createView())
+        );
+        
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
     
     /**
@@ -61,8 +106,13 @@ class RegionController extends Controller
      * @Route("/{id}/delete", name="region_delete", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function deleteAction(Request $request, Region $user)
+    public function deleteAction(Request $request, Region $region)
     {
-        // ...
+        $dm = $this->getDoctrine()->getManager();
+        $dm->remove($region);
+        $dm->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'region.msg.removed');
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
 }

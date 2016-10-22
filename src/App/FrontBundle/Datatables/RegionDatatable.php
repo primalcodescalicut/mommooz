@@ -23,13 +23,16 @@ class RegionDatatable extends AbstractDatatableView
             'actions' => array(
                 array(
                     'route' => $this->router->generate('region_new'),
-                    'label' => $this->translator->trans('datatables.actions.new'),
+                    'label' => $this->translator->trans('region.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('datatables.actions.new'),
+                        'title' => $this->translator->trans('region.actions.new'),
                         'class' => 'btn btn-primary',
-                        'role' => 'button'
+                        'role' => 'button',
+                        'onclick' => 'return false;',
+                        'ng-click' => 'toggleModal($event);',
+                        'modalTitle' => $this->translator->trans('region.title.new'),
                     ),
                 )
             )
@@ -103,31 +106,36 @@ class RegionDatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'region_delete',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('datatables.actions.delete'),
-                        'icon' => 'glyphicon glyphicon-trash',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('datatables.actions.delete'),
-                            'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button'
-                        ),
-                    ),
-                    array(
                         'route' => 'region_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('datatables.actions.edit'),
+                        'label' => $this->translator->trans('region.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('datatables.actions.edit'),
+                            'title' => $this->translator->trans('region.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button'
+                            'role' => 'button',
+                            'onclick' => 'return openModal(event);',
+                            'modalTitle' => $this->translator->trans('region.title.edit'),
+                            'style' => 'margin-right:5px;'
+                        ),
+                    ),
+                    array(
+                        'route' => 'region_delete',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('region.actions.delete'),
+                        'icon' => 'glyphicon glyphicon-trash',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('region.actions.delete'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openConfirm(event);',
+                            'cofirmText' => $this->translator->trans('region.delete.confirm')
                         ),
                     )
                 )
