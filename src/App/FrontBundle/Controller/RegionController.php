@@ -115,4 +115,24 @@ class RegionController extends Controller
         $this->get('session')->getFlashBag()->add('success', 'region.msg.removed');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
+    
+    /**
+     * List Region details with location.
+     *
+     * @Route("/{id}/details", name="region_detail", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function detailAction(Request $request, Region $region)
+    {
+        $dm = $this->getDoctrine()->getManager();        
+        $code = FormHelper::FORM;
+        
+        $locationDatatable = $this->get('app.front.datatable.location');
+        $locationDatatable->buildDatatable(array('region' => $region));
+        $body = $this->renderView('AppFrontBundle:Region:detail.html.twig',
+            array('locationDatatable' => $locationDatatable)
+        );
+        
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
+    }
 }

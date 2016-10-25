@@ -1,7 +1,8 @@
 <?php
 
 namespace App\FrontBundle\Entity;
-
+use App\FrontBundle\Entity\Location;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +23,7 @@ class Region
     private $id;
 
     /**
-     * @var User
+     * @var State
      *
      * @ORM\ManyToOne(targetEntity="State", inversedBy="regions"))
      */
@@ -48,6 +49,13 @@ class Region
      * @ORM\Column(name="created_on", type="datetime")
      */
     private $createdOn;
+    
+    /**
+     * @var ArrayCollection|Location[]
+     *
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="region")
+     */
+    private $locations;
 
     /**
      * Constructor
@@ -161,5 +169,39 @@ class Region
     public function getCreatedOn()
     {
         return $this->createdOn;
+    }
+
+    /**
+     * Add location
+     *
+     * @param Location $location
+     *
+     * @return Region
+     */
+    public function addLocation(Location $location)
+    {
+        $this->locations[] = $location;
+
+        return $this;
+    }
+
+    /**
+     * Remove location
+     *
+     * @param Location $location
+     */
+    public function removeLocation(Location $location)
+    {
+        $this->locations->removeElement($location);
+    }
+
+    /**
+     * Get locations
+     *
+     * @return Collection
+     */
+    public function getLocations()
+    {
+        return $this->locations;
     }
 }

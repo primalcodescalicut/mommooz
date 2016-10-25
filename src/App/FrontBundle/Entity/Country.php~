@@ -119,4 +119,28 @@ class Country
     {
         return $this->states;
     }
+
+    /**
+     * Set countryCode
+     *
+     * @param string $countryCode
+     *
+     * @return Country
+     */
+    public function setCountryCode($countryCode)
+    {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get countryCode
+     *
+     * @return string
+     */
+    public function getCountryCode()
+    {
+        return $this->countryCode;
+    }
 }

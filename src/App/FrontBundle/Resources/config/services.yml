@@ -77,3 +77,7 @@ services:
     app.front.datatable.region:
           class: App\FrontBundle\Datatables\RegionDatatable
           parent: sg_datatables.datatable.abstract
+          
+    app.front.datatable.location:
+          class: App\FrontBundle\Datatables\LocationDatatable
+          parent: sg_datatables.datatable.abstract

@@ -66,6 +66,11 @@ app_front_vendor_home:
     defaults: { _controller: AppFrontBundle:Vendor:index}
     
 admin_region_actions:
-    resource: "@AppFrontBundle/Controller/"
+    resource: "@AppFrontBundle/Controller/RegionController.php"
     type:     annotation
     prefix: /region
+    
+admin_location_actions:
+    resource: "@AppFrontBundle/Controller/LocationController.php"
+    type:     annotation
+    prefix: /location
