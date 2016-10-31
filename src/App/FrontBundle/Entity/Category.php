@@ -3,6 +3,9 @@
 namespace App\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\FrontBundle\Entity\Keyword;
+use App\FrontBundle\Entity\Category;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Category
@@ -24,13 +27,14 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="category_name", type="string", length=255, is_null="true")
+     * @ORM\Column(name="category_name", type="string", length=255)
      */
     private $categoryName;
 
     /**
      * @var State
-     *
+     * 
+     * @ORM\Column(options={"default" : 0})
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="childs"))
      */
     private $parent;
@@ -162,5 +166,70 @@ class Category
     {
         return $this->status;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->keywords = new ArrayCollection();
+        $this->childs = new ArrayCollection();
+    }
 
+    /**
+     * Add keyword
+     *
+     * @param Keyword $keyword
+     *
+     * @return Category
+     */
+    public function addKeyword(Keyword $keyword)
+    {
+        $this->keywords[] = $keyword;
+
+        return $this;
+    }
+
+    /**
+     * Remove keyword
+     *
+     * @param Keyword $keyword
+     */
+    public function removeKeyword(Keyword $keyword)
+    {
+        $this->keywords->removeElement($keyword);
+    }
+
+    /**
+     * Add child
+     *
+     * @param Category $child
+     *
+     * @return Category
+     */
+    public function addChild(Category $child)
+    {
+        $this->childs[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param Category $child
+     */
+    public function removeChild(Category $child)
+    {
+        $this->childs->removeElement($child);
+    }
+
+    /**
+     * Get childs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChilds()
+    {
+        return $this->childs;
+    }
+}

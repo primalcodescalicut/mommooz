@@ -1,0 +1,4 @@
+App\FrontBundle\Entity\Country:
+    main:
+        categoryName: 'Main'
+        status: 1
