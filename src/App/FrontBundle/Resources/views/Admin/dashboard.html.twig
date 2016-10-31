@@ -15,11 +15,21 @@
                         <div class="nav-tabs-horizontal margin-bottom-20">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#h1" role="tab">Regions</a>
+                                    <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#region" role="tab">Regions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript: void(0);" data-toggle="tab" data-target="#category" role="tab">Category</a>
                                 </li>
                             </ul>
+                            <div class="tab-content" style="padding-top: 15px;">
+                                <div class="tab-pane active" id="region">
+                                    {{ datatable_render(regionDatatable) }}
+                                </div>
+                                <div class="tab-pane" id="category">
+                                    Category
+                                </div>
+                            </div>
                         </div>
-                        {{ datatable_render(regionDatatable) }}
                     </div>
                 </div>
             </div>

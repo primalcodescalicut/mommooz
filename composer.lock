@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25d6d50bcde8c513ea5320fd540b6fdb",
-    "content-hash": "177c765cbd12b6bbd6ea74f2ed52972b",
+    "hash": "3f41f56914e74144ada06721b014bba4",
+    "content-hash": "aac814efcb55fac9fc25d28edb5a39cf",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1685,16 +1685,16 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "dev-master",
+            "version": "v0.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8533a50c10f511ad63d03664d17dedd4cce29859"
+                "reference": "6fdfe19d2b13a3f12ba0792227f0718809ce4e4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8533a50c10f511ad63d03664d17dedd4cce29859",
-                "reference": "8533a50c10f511ad63d03664d17dedd4cce29859",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/6fdfe19d2b13a3f12ba0792227f0718809ce4e4d",
+                "reference": "6fdfe19d2b13a3f12ba0792227f0718809ce4e4d",
                 "shasum": ""
             },
             "require": {
@@ -1734,7 +1734,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2016-09-11 04:15:21"
+            "time": "2016-09-11 01:34:11"
         },
         {
             "name": "monolog/monolog",
@@ -3553,7 +3553,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "leafo/lessphp": 20,
-        "leafo/scssphp": 20,
         "gedmo/doctrine-extensions": 20,
         "gregwar/image-bundle": 20
     },
